@@ -20,6 +20,26 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        
+//        presenter.getNews { result in
+//            switch result {
+//
+//            case .success(let news):
+//                print("hitsCount: \(news.hits.count)")
+//            case .failure(let error):
+//                print("error: \(error)")
+//            }
+//        }
+        
+        presenter.getNews(withQuery: "google") { result in
+            switch result {
+                
+            case .success(let news):
+                print("hitsCount: \(news.hits)")
+            case .failure(let error):
+                print("error: \(error)")
+            }
+        }
     }
     
     func setupView() {

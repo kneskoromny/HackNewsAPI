@@ -9,7 +9,9 @@ import Foundation
 
 // MARK: - Protocol requirements
 protocol NewsPresenterProtocol {
-    
+    func getNews(completion: @escaping (Result<News, Error>) -> Void)
+    func getNews(
+        withQuery query: String, completion: @escaping (Result<News, Error>) -> Void)
 }
 
 class NewsPresenter {
@@ -28,5 +30,11 @@ class NewsPresenter {
 
 // MARK: - Protocol requirements implementation
 extension NewsPresenter: NewsPresenterProtocol {
+    func getNews(completion: @escaping (Result<News, Error>) -> Void) {
+        networkService.fetchFirstPagePosts(completion: completion)
+    }
     
+    func getNews(withQuery query: String, completion: @escaping (Result<News, Error>) -> Void) {
+        networkService.fetchFilteredStories(query: query, completion: completion)
+    }
 }

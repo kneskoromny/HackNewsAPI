@@ -12,20 +12,22 @@ import Moya
 protocol NetworkServiceProtocol {
     var provider: MoyaProvider<API> { get }
     
-    func fetchFirstPagePosts()
-    func fetchFilteredStories()
+    func fetchFirstPagePosts(completion: @escaping (Result<News, Error>) -> Void)
+    func fetchFilteredStories(
+        query: String, completion: @escaping (Result<News, Error>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
     
     var provider = MoyaProvider<API>()
     
-    func fetchFirstPagePosts() {
-        <#code#>
+    func fetchFirstPagePosts(completion: @escaping (Result<News, Error>) -> Void) {
+        request(target: .frontPage, completion: completion)
     }
     
-    func fetchFilteredStories() {
-        <#code#>
+    func fetchFilteredStories(
+        query: String, completion: @escaping (Result<News, Error>) -> Void) {
+            request(target: .search(query: query), completion: completion)
     }
 }
 // MARK: - Protocol requirements implementation
