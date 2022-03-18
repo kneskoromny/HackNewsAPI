@@ -15,4 +15,14 @@ enum K {
         static let light = UIColor.systemGray4
         static let dark = UIColor.label
     }
+    
+    enum API {
+        static let base = "http://hn.algolia.com/api/v1"
+        static let path = "/search"
+        
+        enum QueryValue {
+            static let frontPage = "front_page"
+            static let story = "story"
+        }
+    }
 }
