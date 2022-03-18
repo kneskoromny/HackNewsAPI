@@ -7,13 +7,30 @@
 
 import UIKit
 
+protocol NewsViewProtocol: AnyObject {
+    
+}
+
 class NewsViewController: UIViewController {
+    
+    var presenter: NewsPresenterProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        setupView()
     }
-
-
+    
+    func setupView() {
+        let networkService = NetworkService()
+        let presenter = NewsPresenter(
+            view: self, networkService: networkService
+        )
+        self.presenter = presenter
+    }
+    
 }
 
+extension NewsViewController: NewsViewProtocol {
+    
+}
