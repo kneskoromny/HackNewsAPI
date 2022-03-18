@@ -18,6 +18,8 @@
 		F738FD2E27E4802100DED8B5 /* LayoutKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F738FD2627E4802100DED8B5 /* LayoutKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F738FD3127E49F1300DED8B5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3027E49F1300DED8B5 /* API.swift */; };
 		F738FD3327E4AE1E00DED8B5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3227E4AE1E00DED8B5 /* Model.swift */; };
+		F738FD3627E4BC8C00DED8B5 /* Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3527E4BC8C00DED8B5 /* Factories.swift */; };
+		F738FD3927E4BDCA00DED8B5 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3727E4BDCA00DED8B5 /* NewsCell.swift */; };
 		F7D2E07427E45E0B00A0595A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07327E45E0B00A0595A /* AppDelegate.swift */; };
 		F7D2E07627E45E0B00A0595A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07527E45E0B00A0595A /* SceneDelegate.swift */; };
 		F7D2E07827E45E0B00A0595A /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07727E45E0B00A0595A /* NewsViewController.swift */; };
@@ -51,6 +53,8 @@
 		F738FD2627E4802100DED8B5 /* LayoutKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LayoutKit.xcframework; path = Carthage/Build/LayoutKit.xcframework; sourceTree = "<group>"; };
 		F738FD3027E49F1300DED8B5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F738FD3227E4AE1E00DED8B5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F738FD3527E4BC8C00DED8B5 /* Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factories.swift; sourceTree = "<group>"; };
+		F738FD3727E4BDCA00DED8B5 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		F7D2E07027E45E0B00A0595A /* HackNewsAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackNewsAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D2E07327E45E0B00A0595A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D2E07527E45E0B00A0595A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +97,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F738FD3C27E4BDE600DED8B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F738FD3727E4BDCA00DED8B5 /* NewsCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F7D2E06727E45E0B00A0595A = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				F7D2E08927E460F900A0595A /* Supports */,
+				F738FD3C27E4BDE600DED8B5 /* Views */,
 				F738FD3427E4AE2100DED8B5 /* Models */,
 				F738FD2227E47DC400DED8B5 /* Services */,
 				F7D2E08B27E4611200A0595A /* Modules */,
@@ -135,6 +148,7 @@
 		F7D2E08A27E4610900A0595A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F738FD3527E4BC8C00DED8B5 /* Factories.swift */,
 				F7D2E08727E45FA800A0595A /* Constants.swift */,
 				F7D2E07C27E45E0D00A0595A /* Assets.xcassets */,
 			);
@@ -231,9 +245,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F738FD3627E4BC8C00DED8B5 /* Factories.swift in Sources */,
 				F7D2E07827E45E0B00A0595A /* NewsViewController.swift in Sources */,
 				F7D2E07427E45E0B00A0595A /* AppDelegate.swift in Sources */,
 				F7D2E08D27E4617A00A0595A /* NewsPresenter.swift in Sources */,
+				F738FD3927E4BDCA00DED8B5 /* NewsCell.swift in Sources */,
 				F7D2E07627E45E0B00A0595A /* SceneDelegate.swift in Sources */,
 				F738FD2127E47DC100DED8B5 /* NetworkService.swift in Sources */,
 				F7D2E08827E45FA800A0595A /* Constants.swift in Sources */,

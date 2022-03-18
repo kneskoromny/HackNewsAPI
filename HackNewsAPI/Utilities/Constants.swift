@@ -8,7 +8,9 @@
 import UIKit
 
 enum K {
+    
     static let appName = "Hacker News"
+    static let cellID = "NewsCell"
     
     enum Colors {
         static let white = UIColor.systemBackground
