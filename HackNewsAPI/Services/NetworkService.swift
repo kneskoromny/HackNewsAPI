@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Moya
 
 // MARK: - Protocol requirements
 protocol NetworkServiceProtocol {

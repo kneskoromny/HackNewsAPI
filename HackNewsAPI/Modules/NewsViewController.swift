@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import LayoutKit
 
 protocol NewsViewProtocol: AnyObject {
     
