@@ -8,6 +8,7 @@
 import UIKit
 import LayoutKit
 
+
 protocol NewsViewProtocol: AnyObject {
     func updateUI()
 }
@@ -60,6 +61,9 @@ class NewsViewController: UIViewController {
     
     @objc func action() {
         print("bbi tapped!")
+        showAlert(in: self) { searchQuery in
+            self.presenter.getNews(withQuery: searchQuery)
+        }
     }
 }
 

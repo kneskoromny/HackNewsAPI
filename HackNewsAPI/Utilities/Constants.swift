@@ -15,7 +15,7 @@ enum K {
     
     enum Colors {
         static let white = UIColor.systemBackground
-        static let light = UIColor.systemGray4
+        static let light = UIColor.systemGray2
         static let dark = UIColor.label
     }
     

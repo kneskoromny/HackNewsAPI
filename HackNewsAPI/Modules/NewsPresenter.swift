@@ -14,8 +14,7 @@ protocol NewsPresenterProtocol {
     func getHit(atIndexPath indexPath: IndexPath) -> Hit
     
     func getNews()
-    func getNews(
-        withQuery query: String, completion: @escaping (Result<News, Error>) -> Void)
+    func getNews(withQuery query: String)
 }
 
 class NewsPresenter {
@@ -63,7 +62,21 @@ extension NewsPresenter: NewsPresenterProtocol {
         }
     }
     
-    func getNews(withQuery query: String, completion: @escaping (Result<News, Error>) -> Void) {
-        networkService.fetchFilteredStories(query: query, completion: completion)
+    func getNews(withQuery query: String) {
+        hits = []
+        networkService.fetchFilteredStories(query: query) { result in
+            
+            switch result {
+            case .success(let news):
+                self.hits = news.hits
+                DispatchQueue.main.async {
+                    print(#function, "Current Thread: \(Thread.current)")
+                    self.view?.updateUI()
+                }
+                
+            case .failure(let error):
+                print("\(K.AppErrors.fetchError): \(error)")
+            }
+        }
     }
 }

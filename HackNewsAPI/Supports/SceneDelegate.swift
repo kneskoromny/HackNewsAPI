@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appearance.titleTextAttributes = [
             .foregroundColor: K.Colors.white,
             .font: UIFont.systemFont(ofSize: 30),
-            .kern: 3
+            .kern: 2
         ]
         
         navController.navigationBar.scrollEdgeAppearance = appearance

@@ -28,3 +28,23 @@ func makeBarButtonItem(in vc: UIViewController, withAction action: Selector) -> 
     bi.tintColor = K.Colors.white
     return bi
 }
+
+func showAlert(
+    in vc: UIViewController, completion: @escaping (String) -> Void) {
+        let ac = UIAlertController(
+            title: "Search",
+            message: "Let's search something interesting right now!",
+            preferredStyle: .alert
+        )
+        ac.addTextField { tf in
+            tf.placeholder = "type query here"
+        }
+        let action = UIAlertAction(
+            title: "Go ahead!", style: .default) { _ in
+                guard let text = ac.textFields?.first?.text else { return }
+                completion(text)
+            }
+        ac.addAction(action)
+        vc.present(ac, animated: true, completion: nil)
+        
+    }
