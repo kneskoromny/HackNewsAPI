@@ -21,3 +21,10 @@ func makeSpinner() -> UIActivityIndicatorView {
     s.startAnimating()
     return s
 }
+
+func makeBarButtonItem(in vc: UIViewController, withAction action: Selector) -> UIBarButtonItem {
+    let bi = UIBarButtonItem(
+        barButtonSystemItem: .search, target: vc, action: action)
+    bi.tintColor = K.Colors.white
+    return bi
+}

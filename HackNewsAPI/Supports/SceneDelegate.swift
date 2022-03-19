@@ -25,9 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = K.Colors.light
-        appearance.titleTextAttributes = [.foregroundColor: K.Colors.dark]
+        appearance.titleTextAttributes = [
+            .foregroundColor: K.Colors.white,
+            .font: UIFont.systemFont(ofSize: 30),
+            .kern: 3
+        ]
         
         navController.navigationBar.scrollEdgeAppearance = appearance
+        navController.navigationBar.standardAppearance = appearance
         
         window.rootViewController = navController
         window.makeKeyAndVisible()

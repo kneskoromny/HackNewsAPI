@@ -22,6 +22,10 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = makeBarButtonItem(
+            in: self,withAction: #selector(action)
+        )
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -40,6 +44,7 @@ class NewsViewController: UIViewController {
     }
     
     func configureLayout() {
+        
         view.addSubview(tableView)
         view.addSubview(spinner)
         
@@ -51,6 +56,10 @@ class NewsViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    @objc func action() {
+        print("bbi tapped!")
     }
 }
 
