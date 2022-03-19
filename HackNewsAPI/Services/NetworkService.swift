@@ -34,7 +34,7 @@ class NetworkService: NetworkServiceProtocol {
 extension NetworkService {
     private func request<T: Decodable>(
         target: API, completion: @escaping (Result<T, Error>) -> Void) {
-            
+        print(#function, "Current Thread: \(Thread.current)")
           provider.request(target) { result in
               switch result {
               case let .success(response):

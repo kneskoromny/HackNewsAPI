@@ -9,15 +9,20 @@ import UIKit
 
 class NewsCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    var newsItem: NewsItemLayout? {
+        didSet {
+            addNewsItem()
+        }
     }
     
+    func addNewsItem() {
+        let width = contentView.bounds.width
+        
+        if let arrangment = newsItem?.arrangement(
+            width: width,
+            height: K.cellHeight) {
+            
+            arrangment.makeViews(in: contentView)
+        }
+    }
 }

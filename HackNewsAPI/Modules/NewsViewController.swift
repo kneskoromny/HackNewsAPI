@@ -9,7 +9,7 @@ import UIKit
 import LayoutKit
 
 protocol NewsViewProtocol: AnyObject {
-    
+    func updateUI()
 }
 
 class NewsViewController: UIViewController {
@@ -22,29 +22,12 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         
         setupView()
         configureLayout()
         
-//        presenter.getNews { result in
-//            switch result {
-//
-//            case .success(let news):
-//                print("hitsCount: \(news.hits.count)")
-//            case .failure(let error):
-//                print("error: \(error)")
-//            }
-//        }
-        
-//        presenter.getNews(withQuery: "google") { result in
-//            switch result {
-//
-//            case .success(let news):
-//                print("hitsCount: \(news.hits)")
-//            case .failure(let error):
-//                print("error: \(error)")
-//            }
-//        }
+        presenter.getNews()
     }
     
     func setupView() {
@@ -64,21 +47,36 @@ class NewsViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
+    @objc func btnAction() {
+        print("btn tapped!")
+    }
 }
 
 extension NewsViewController: NewsViewProtocol {
+    func updateUI() {
+        tableView.reloadData()
+    }
+    
     
 }
+
 // MARK: - Table view data source
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        presenter.hitsCount
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellID, for: indexPath) as! NewsCell
-        
+        cell.newsItem = NewsItemLayout(
+            title: "Good bye \(indexPath.row) times!", author: "Kirill Neskoromnyy", url: "some url", action: #selector(btnAction)
+        )
         return cell
     }
-    
-    
+}
+
+// MARK: - Table view delegate
+extension NewsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        K.cellHeight
+    }
 }

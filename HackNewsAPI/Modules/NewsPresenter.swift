@@ -9,15 +9,23 @@ import Foundation
 
 // MARK: - Protocol requirements
 protocol NewsPresenterProtocol {
-    func getNews(completion: @escaping (Result<News, Error>) -> Void)
+    var hitsCount: Int { get }
+    
+    func getHit(atIndexPath indexPath: IndexPath) -> Hit
+    
+    func getNews()
     func getNews(
         withQuery query: String, completion: @escaping (Result<News, Error>) -> Void)
 }
 
 class NewsPresenter {
+    
     // MARK: - Dependencies
     weak var view: NewsViewProtocol?
     var networkService: NetworkServiceProtocol
+    
+    // MARK: - Data
+    var hits = [Hit]()
     
     // MARK: - Initializers
     init(
@@ -30,8 +38,27 @@ class NewsPresenter {
 
 // MARK: - Protocol requirements implementation
 extension NewsPresenter: NewsPresenterProtocol {
-    func getNews(completion: @escaping (Result<News, Error>) -> Void) {
-        networkService.fetchFirstPagePosts(completion: completion)
+    var hitsCount: Int {
+        hits.count
+    }
+    
+    func getHit(atIndexPath indexPath: IndexPath) -> Hit {
+        hits[indexPath.row]
+    }
+    
+    func getNews() {
+        networkService.fetchFirstPagePosts { result in
+            print(#function, "Current Thread: \(Thread.current)")
+            
+            switch result {
+            case .success(let news):
+                self.hits = news.hits
+                self.view?.updateUI()
+                
+            case .failure(let error):
+                print("\(K.AppErrors.fetchError): \(error)")
+            }
+        }
     }
     
     func getNews(withQuery query: String, completion: @escaping (Result<News, Error>) -> Void) {

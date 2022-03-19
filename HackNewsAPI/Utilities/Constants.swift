@@ -11,6 +11,7 @@ enum K {
     
     static let appName = "Hacker News"
     static let cellID = "NewsCell"
+    static let cellHeight: CGFloat = 70
     
     enum Colors {
         static let white = UIColor.systemBackground
@@ -26,5 +27,9 @@ enum K {
             static let frontPage = "front_page"
             static let story = "story"
         }
+    }
+    
+    enum AppErrors {
+        static let fetchError = "An error occurred while loading data"
     }
 }
