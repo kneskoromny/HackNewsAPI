@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsCell: UITableViewCell {
+final class NewsCell: UITableViewCell {
 
     var newsItem: NewsItemLayout? {
         didSet {

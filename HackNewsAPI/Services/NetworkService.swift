@@ -17,7 +17,7 @@ protocol NetworkServiceProtocol {
         query: String, completion: @escaping (Result<News, Error>) -> Void)
 }
 
-class NetworkService: NetworkServiceProtocol {
+final class NetworkService: NetworkServiceProtocol {
     
     var provider = MoyaProvider<API>()
     

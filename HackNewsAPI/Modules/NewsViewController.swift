@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import LayoutKit
-
 
 protocol NewsViewProtocol: AnyObject {
     func updateUI()
@@ -20,6 +18,7 @@ class NewsViewController: UIViewController {
     private let tableView = makeTableView()
     private let spinner = makeSpinner()
 
+    // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +35,8 @@ class NewsViewController: UIViewController {
         presenter.getNews()
     }
     
-    func setupView() {
+    // MARK: - Methods
+    private func setupView() {
         let networkService = NetworkService()
         let presenter = NewsPresenter(
             view: self, networkService: networkService
@@ -44,8 +44,7 @@ class NewsViewController: UIViewController {
         self.presenter = presenter
     }
     
-    func configureLayout() {
-        
+    private func configureLayout() {
         view.addSubview(tableView)
         view.addSubview(spinner)
         
@@ -67,6 +66,7 @@ class NewsViewController: UIViewController {
     }
 }
 
+// MARK: - News view protocol
 extension NewsViewController: NewsViewProtocol {
     func updateUI() {
         tableView.reloadData()

@@ -30,19 +30,24 @@ extension API: TargetType {
     var task: Task {
         switch self {
         case .frontPage:
-            return .requestParameters(parameters: [
+            return .requestParameters(
+                parameters: [
                 "tags": K.API.QueryValue.frontPage
-            ], encoding: URLEncoding.queryString)
+            ],
+                encoding: URLEncoding.queryString
+            )
         case .search(let query):
-            return .requestParameters(parameters: [
-                "query": query, "tags": K.API.QueryValue.story
-            ], encoding: URLEncoding.queryString)
+            return .requestParameters(
+                parameters: [
+                "query": query,
+                "tags": K.API.QueryValue.story
+            ],
+               encoding: URLEncoding.queryString
+            )
         }
     }
     
     var headers: [String : String]? {
         return nil
-    }
-    
-    
+    }  
 }
