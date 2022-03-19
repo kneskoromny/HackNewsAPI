@@ -48,12 +48,14 @@ extension NewsPresenter: NewsPresenterProtocol {
     
     func getNews() {
         networkService.fetchFirstPagePosts { result in
-            print(#function, "Current Thread: \(Thread.current)")
             
             switch result {
             case .success(let news):
                 self.hits = news.hits
-                self.view?.updateUI()
+                DispatchQueue.main.async {
+                    print(#function, "Current Thread: \(Thread.current)")
+                    self.view?.updateUI()
+                }
                 
             case .failure(let error):
                 print("\(K.AppErrors.fetchError): \(error)")

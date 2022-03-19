@@ -10,7 +10,7 @@ import LayoutKit
 
 final class NewsItemLayout: InsetLayout<UIView> {
     
-    public init(title: String, author: String, url: String, action: Selector) {
+    public init(hit: Hit) {
         
         let image = SizeLayout<UIImageView>(
             width: 50,
@@ -22,31 +22,17 @@ final class NewsItemLayout: InsetLayout<UIView> {
         )
         
         let titleLayout = LabelLayout(
-            text: title,
+            text: hit.title ?? "No title",
             font: UIFont.systemFont(ofSize: 15)
         ) { label in
             label.textColor = K.Colors.dark
         }
         
         let authorLayout = LabelLayout(
-            text: author,
+            text: hit.author ?? "No author",
             font: UIFont.systemFont(ofSize: 12)
         ) { label in
             label.textColor = K.Colors.light
-        }
-        
-        let button = ButtonLayout(
-            type: .system,
-            title: "Перейти",
-            font: UIFont.systemFont(ofSize: 12),
-            contentEdgeInsets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
-            alignment: .center
-        ) { btn in
-            btn.backgroundColor = K.Colors.dark
-            btn.setTitleColor(K.Colors.white, for: .normal)
-            btn.layer.cornerRadius = 5
-            
-            btn.addTarget(nil, action: action, for: .touchUpInside)
         }
         
         super.init(
@@ -59,10 +45,9 @@ final class NewsItemLayout: InsetLayout<UIView> {
                     StackLayout(
                         axis: .vertical,
                         spacing: 8,
-                        alignment: .center,
+                        alignment: .fillLeading,
                         sublayouts: [titleLayout, authorLayout]
-                    ),
-                    button
+                    )
                 ]
             )
         )

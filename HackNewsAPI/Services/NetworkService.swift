@@ -28,25 +28,28 @@ class NetworkService: NetworkServiceProtocol {
     func fetchFilteredStories(
         query: String, completion: @escaping (Result<News, Error>) -> Void) {
             request(target: .search(query: query), completion: completion)
-    }
+        }
 }
 // MARK: - Protocol requirements implementation
 extension NetworkService {
     private func request<T: Decodable>(
         target: API, completion: @escaping (Result<T, Error>) -> Void) {
-        print(#function, "Current Thread: \(Thread.current)")
-          provider.request(target) { result in
-              switch result {
-              case let .success(response):
-                  do {
-                      let results = try JSONDecoder().decode(T.self, from: response.data)
-                      completion(.success(results))
-                  } catch let error {
-                      completion(.failure(error))
-                  }
-              case let .failure(error):
-                  completion(.failure(error))
-              }
-          }
-      }
+            
+            DispatchQueue.global().async {
+                print(#function, "Current Thread: \(Thread.current)")
+                self.provider.request(target) { result in
+                    switch result {
+                    case let .success(response):
+                        do {
+                            let results = try JSONDecoder().decode(T.self, from: response.data)
+                            completion(.success(results))
+                        } catch let error {
+                            completion(.failure(error))
+                        }
+                    case let .failure(error):
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
 }

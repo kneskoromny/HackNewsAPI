@@ -16,7 +16,8 @@ class NewsViewController: UIViewController {
     
     var presenter: NewsPresenterProtocol!
     
-    let tableView = makeTableView()
+    private let tableView = makeTableView()
+    private let spinner = makeSpinner()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,24 +41,25 @@ class NewsViewController: UIViewController {
     
     func configureLayout() {
         view.addSubview(tableView)
+        view.addSubview(spinner)
         
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        tableView.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    }
-    
-    @objc func btnAction() {
-        print("btn tapped!")
     }
 }
 
 extension NewsViewController: NewsViewProtocol {
     func updateUI() {
         tableView.reloadData()
-    }
-    
-    
+        spinner.stopAnimating()
+        spinner.isHidden = true
+    }  
 }
 
 // MARK: - Table view data source
@@ -67,9 +69,9 @@ extension NewsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellID, for: indexPath) as! NewsCell
-        cell.newsItem = NewsItemLayout(
-            title: "Good bye \(indexPath.row) times!", author: "Kirill Neskoromnyy", url: "some url", action: #selector(btnAction)
-        )
+        let hit = presenter.getHit(atIndexPath: indexPath)
+        cell.newsItem = NewsItemLayout(hit: hit)
+        
         return cell
     }
 }

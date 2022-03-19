@@ -11,7 +11,13 @@ func makeTableView() -> UITableView {
     let tv = UITableView()
     tv.translatesAutoresizingMaskIntoConstraints = false
     tv.register(NewsCell.self, forCellReuseIdentifier: K.cellID)
-    
-    tv.backgroundColor = .magenta
     return tv
+}
+
+func makeSpinner() -> UIActivityIndicatorView {
+    let s = UIActivityIndicatorView()
+    s.translatesAutoresizingMaskIntoConstraints = false
+    s.style = .large
+    s.startAnimating()
+    return s
 }
