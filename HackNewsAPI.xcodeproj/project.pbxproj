@@ -21,6 +21,8 @@
 		F738FD3627E4BC8C00DED8B5 /* Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3527E4BC8C00DED8B5 /* Factories.swift */; };
 		F738FD3927E4BDCA00DED8B5 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3727E4BDCA00DED8B5 /* NewsCell.swift */; };
 		F738FD3E27E5DA9F00DED8B5 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738FD3D27E5DA9F00DED8B5 /* NewsItem.swift */; };
+		F7C35EF227E62C620086C573 /* Extension + UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C35EF127E62C620086C573 /* Extension + UINavigationController.swift */; };
+		F7C35EF427E62D660086C573 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C35EF327E62D660086C573 /* Extension + UIViewController.swift */; };
 		F7D2E07427E45E0B00A0595A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07327E45E0B00A0595A /* AppDelegate.swift */; };
 		F7D2E07627E45E0B00A0595A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07527E45E0B00A0595A /* SceneDelegate.swift */; };
 		F7D2E07827E45E0B00A0595A /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D2E07727E45E0B00A0595A /* NewsViewController.swift */; };
@@ -57,6 +59,8 @@
 		F738FD3527E4BC8C00DED8B5 /* Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factories.swift; sourceTree = "<group>"; };
 		F738FD3727E4BDCA00DED8B5 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		F738FD3D27E5DA9F00DED8B5 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
+		F7C35EF127E62C620086C573 /* Extension + UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UINavigationController.swift"; sourceTree = "<group>"; };
+		F7C35EF327E62D660086C573 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		F7D2E07027E45E0B00A0595A /* HackNewsAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackNewsAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D2E07327E45E0B00A0595A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D2E07527E45E0B00A0595A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +112,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F7C35EF527E62E260086C573 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F7C35EF127E62C620086C573 /* Extension + UINavigationController.swift */,
+				F7C35EF327E62D660086C573 /* Extension + UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F7D2E06727E45E0B00A0595A = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +146,7 @@
 				F738FD3427E4AE2100DED8B5 /* Models */,
 				F738FD2227E47DC400DED8B5 /* Services */,
 				F7D2E08B27E4611200A0595A /* Modules */,
+				F7C35EF527E62E260086C573 /* Extensions */,
 				F7D2E08A27E4610900A0595A /* Utilities */,
 			);
 			path = HackNewsAPI;
@@ -249,11 +263,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F738FD3627E4BC8C00DED8B5 /* Factories.swift in Sources */,
+				F7C35EF227E62C620086C573 /* Extension + UINavigationController.swift in Sources */,
 				F7D2E07827E45E0B00A0595A /* NewsViewController.swift in Sources */,
 				F7D2E07427E45E0B00A0595A /* AppDelegate.swift in Sources */,
 				F7D2E08D27E4617A00A0595A /* NewsPresenter.swift in Sources */,
 				F738FD3927E4BDCA00DED8B5 /* NewsCell.swift in Sources */,
 				F7D2E07627E45E0B00A0595A /* SceneDelegate.swift in Sources */,
+				F7C35EF427E62D660086C573 /* Extension + UIViewController.swift in Sources */,
 				F738FD2127E47DC100DED8B5 /* NetworkService.swift in Sources */,
 				F7D2E08827E45FA800A0595A /* Constants.swift in Sources */,
 				F738FD3E27E5DA9F00DED8B5 /* NewsItem.swift in Sources */,

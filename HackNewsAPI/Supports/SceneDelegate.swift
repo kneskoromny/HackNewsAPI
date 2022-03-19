@@ -11,26 +11,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         let window = UIWindow(windowScene: windowScene)
+        
         let newsVC = NewsViewController()
-        newsVC.view.backgroundColor = K.Colors.white
-        newsVC.navigationItem.title = K.appName
-        
+        newsVC.configureView()
         let navController = UINavigationController(rootViewController: newsVC)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = K.Colors.light
-        appearance.titleTextAttributes = [
-            .foregroundColor: K.Colors.white,
-            .font: UIFont.systemFont(ofSize: 30),
-            .kern: 2
-        ]
-        
+        let appearance = navController.makeAppearance()
         navController.navigationBar.scrollEdgeAppearance = appearance
         navController.navigationBar.standardAppearance = appearance
         

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Protocol requirements
 protocol NewsPresenterProtocol {
     var hitsCount: Int { get }
     
@@ -17,7 +16,7 @@ protocol NewsPresenterProtocol {
     func getNews(withQuery query: String)
 }
 
-class NewsPresenter {
+final class NewsPresenter {
     
     // MARK: - Dependencies
     weak var view: NewsViewProtocol?
@@ -35,7 +34,7 @@ class NewsPresenter {
     }
 }
 
-// MARK: - Protocol requirements implementation
+// MARK: - NewsPresenterProtocol
 extension NewsPresenter: NewsPresenterProtocol {
     var hitsCount: Int {
         hits.count
@@ -46,14 +45,15 @@ extension NewsPresenter: NewsPresenterProtocol {
     }
     
     func getNews() {
-        networkService.fetchFirstPagePosts { result in
+        networkService.fetchFirstPagePosts { [weak self] result in
             
             switch result {
+                
             case .success(let news):
-                self.hits = news.hits
+                self?.hits = news.hits
                 DispatchQueue.main.async {
                     print(#function, "Current Thread: \(Thread.current)")
-                    self.view?.updateUI()
+                    self?.view?.updateUI()
                 }
                 
             case .failure(let error):
@@ -64,14 +64,14 @@ extension NewsPresenter: NewsPresenterProtocol {
     
     func getNews(withQuery query: String) {
         hits = []
-        networkService.fetchFilteredStories(query: query) { result in
+        networkService.fetchFilteredStories(query: query) { [weak self] result in
             
             switch result {
+                
             case .success(let news):
-                self.hits = news.hits
+                self?.hits = news.hits
                 DispatchQueue.main.async {
-                    print(#function, "Current Thread: \(Thread.current)")
-                    self.view?.updateUI()
+                    self?.view?.updateUI()
                 }
                 
             case .failure(let error):

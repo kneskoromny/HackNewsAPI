@@ -59,9 +59,9 @@ class NewsViewController: UIViewController {
     }
     
     @objc func action() {
-        print("bbi tapped!")
-        showAlert(in: self) { searchQuery in
-            self.presenter.getNews(withQuery: searchQuery)
+        showAlert(in: self) { [weak self] searchQuery in
+            self?.presenter.getNews(withQuery: searchQuery)
+            self?.spinner.isHidden = false
         }
     }
 }
@@ -70,7 +70,6 @@ class NewsViewController: UIViewController {
 extension NewsViewController: NewsViewProtocol {
     func updateUI() {
         tableView.reloadData()
-        spinner.stopAnimating()
         spinner.isHidden = true
     }  
 }
