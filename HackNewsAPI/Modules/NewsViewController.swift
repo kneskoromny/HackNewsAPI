@@ -23,7 +23,7 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = makeBarButtonItem(
-            in: self,withAction: #selector(action)
+            in: self, withAction: #selector(action)
         )
         
         tableView.dataSource = self

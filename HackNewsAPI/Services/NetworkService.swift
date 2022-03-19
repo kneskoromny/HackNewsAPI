@@ -14,7 +14,8 @@ protocol NetworkServiceProtocol {
     
     func fetchFirstPagePosts(completion: @escaping (Result<News, Error>) -> Void)
     func fetchFilteredStories(
-        query: String, completion: @escaping (Result<News, Error>) -> Void)
+        query: String, completion: @escaping (Result<News, Error>) -> Void
+    )
 }
 
 final class NetworkService: NetworkServiceProtocol {
@@ -26,30 +27,35 @@ final class NetworkService: NetworkServiceProtocol {
     }
     
     func fetchFilteredStories(
-        query: String, completion: @escaping (Result<News, Error>) -> Void) {
-            request(target: .search(query: query), completion: completion)
-        }
+        query: String, completion: @escaping (Result<News, Error>) -> Void
+    ) {
+        request(target: .search(query: query), completion: completion)
+    }
 }
+
 // MARK: - Protocol requirements implementation
 extension NetworkService {
+    
     private func request<T: Decodable>(
-        target: API, completion: @escaping (Result<T, Error>) -> Void) {
-            
-            DispatchQueue.global().async {
-                print(#function, "Current Thread: \(Thread.current)")
-                self.provider.request(target) { result in
-                    switch result {
-                    case let .success(response):
-                        do {
-                            let results = try JSONDecoder().decode(T.self, from: response.data)
-                            completion(.success(results))
-                        } catch let error {
-                            completion(.failure(error))
-                        }
-                    case let .failure(error):
+        target: API, completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        DispatchQueue.global().async {
+            self.provider.request(target) { result in
+                
+                switch result {
+                    
+                case let .success(response):
+                    do {
+                        let results = try JSONDecoder().decode(T.self, from: response.data)
+                        completion(.success(results))
+                    } catch let error {
                         completion(.failure(error))
                     }
+                    
+                case let .failure(error):
+                    completion(.failure(error))
                 }
             }
         }
+    }
 }
