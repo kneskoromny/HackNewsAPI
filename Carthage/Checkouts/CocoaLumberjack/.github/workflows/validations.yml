@@ -1,0 +1,70 @@
+name: Validations
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  issue_comment:
+    types: [ created ]
+
+env:
+  LC_CTYPE: en_US.UTF-8
+  LANG: en_US.UTF-8
+
+jobs:
+  validate-cocoapods:
+    runs-on: macos-11
+    if: github.event_name != 'issue_comment'
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1.4.0
+        with:
+          xcode-version: ^13.0
+      - uses: actions/checkout@v2
+      - run: pod lib lint
+
+  run-danger-for-internal-pr:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: danger/swift
+        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.12.3
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  run-danger-for-external-pr:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' && github.event.action == 'created'
+      && github.event.issue.pull_request != null
+      && startsWith(github.event.comment.body, '/run_checks')
+    steps:
+      - uses: sushichop/action-repository-permission@v1
+        with:
+          required-permission: write
+          reaction-permitted: '+1'
+          comment-not-permitted: "Sorry, you don't have the permission to execute /run_checks..."
+      - uses: actions/github-script@v5
+        id: pr-details
+        with:
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            return pullRequest;
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{fromJSON(steps.pr-details.outputs.result).head.repo.full_name}}
+          ref: ${{fromJSON(steps.pr-details.outputs.result).head.ref}}
+          fetch-depth: 0
+      - name: danger/swift
+        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.12.3
+        with:
+          args: "--pr ${{github.event.issue.pull_request.url}}"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -33,6 +33,8 @@ class NewsViewController: UIViewController {
         configureLayout()
         
         presenter.getNews()
+        
+        // это тестовый коммент для отображения на ветке testFeature
     }
     
     // MARK: - Methods

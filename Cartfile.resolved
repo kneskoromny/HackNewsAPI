@@ -1,4 +1,2 @@
-github "Alamofire/Alamofire" "5.5.0"
-github "Moya/Moya" "15.0.0"
-github "ReactiveCocoa/ReactiveSwift" "6.7.0"
-github "ReactiveX/RxSwift" "6.5.0"
+github "CocoaLumberjack/CocoaLumberjack" "3.7.4"
+github "SVGKit/SVGKit" "fbd7fc73c4ee5593fde57b9d50fe53d307dcf07c"
